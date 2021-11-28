@@ -7,6 +7,7 @@ function App() {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    setText(data);
   };
   return (
     <section className="section-center">
@@ -24,8 +25,9 @@ function App() {
         Genetator
       </button>
       <article className="lorem-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti alias
-        ipsum perspiciatis earum veritatis ducimus sunt!
+        {text.map((item, index) => {
+          return <p key={index}>{item}</p>;
+        })}
       </article>
     </section>
   );
