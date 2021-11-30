@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
+import SingleColor from "./SingleColor";
 
+import Values from "values.js";
 
 function App() {
-  return (
-    <div>
+  const [color, setColor] = useState("");
+  const [error, setError] = useState(false);
+  const [list, setList] = useState([]);
 
-    </div>
-  );
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+  };
+  return <section></section>;
 }
 
 export default App;
