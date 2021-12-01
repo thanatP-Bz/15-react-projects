@@ -7,19 +7,56 @@ function App() {
   const [list, setList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
-  const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
+  const [alert, setAlert] = useState({
+    show: false,
+    msg: "",
+    type: "",
+  });
+
+  const showAlert = (show = false, type = "", msg = "") => {
+    return setAlert({ show, type, msg });
+  };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    if (!name) {
+      //alert
+      showAlert(true, "danger", "please enter value");
+    } else if (name && isEditing) {
+    } else {
+      //show alert
+      const newItem = { id: Math.random().toString(), title: name };
+      setList([...list, newItem]);
+    }
+    setName("");
   };
 
   return (
     <section className="section-center">
-      <form className="grocery-form" onSubmit={handlerSubmit}></form>
-      <div className="grocery-container">
-        <List />
-        <button className="clear-btn">clear items</button>
-      </div>
+      <form className="grocery-form" onSubmit={handlerSubmit}>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        <h3>grocery buddy</h3>
+        <div className="form-control">
+          <input
+            type="text"
+            className="grocery"
+            placeholder="e.g. eggs"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <button type="submit" className="submit-btn">
+            {isEditing ? "edit" : "submit"}
+          </button>
+        </div>
+      </form>
+      {list.length > 0 && (
+        <div className="grocery-container">
+          <List items={list} />
+          <button className="clear-btn">clear items</button>
+        </div>
+      )}
     </section>
   );
 }
