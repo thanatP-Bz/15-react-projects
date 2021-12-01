@@ -1,46 +1,26 @@
-import React, { useState } from "react";
-import SingleColor from "./SingleColor";
-
-import Values from "values.js";
+import React, { useState, useEffect } from "react";
+import List from "./List";
+import Alert from "./Alert";
 
 function App() {
-  const [color, setColor] = useState("");
-  const [error, setError] = useState(false);
+  const [name, setName] = useState("");
   const [list, setList] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editID, setEditID] = useState(null);
+  const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    try {
-      let colors = new Values(color).all(10);
-      setList(colors);
-    } catch (error) {
-      setError(true);
-      console.log(error);
-    }
   };
+
   return (
-    <>
-      <section className="container">
-        <h3>color generator</h3>
-        <form onSubmit={handlerSubmit}>
-          <input
-            type="text"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            placeholder="#f15025"
-            className={`${error ? "error" : null}`}
-          />
-          <button className="btn" type="submit">
-            submit
-          </button>
-        </form>
-      </section>
-      <section className="colors">
-        {list.map((color, index) => {
-          return <SingleColor key={index} {...color} index={index} />;
-        })}
-      </section>
-    </>
+    <section className="section-center">
+      <form className="grocery-form" onSubmit={handlerSubmit}></form>
+      <div className="grocery-container">
+        <List />
+        <button className="clear-btn">clear items</button>
+      </div>
+    </section>
   );
 }
 
