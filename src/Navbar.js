@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-/* import { FaBars, FaTwitter } from "react-icons/fa"; */
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaTwitter } from "react-icons/fa";
 import { links, social } from "./Data";
 import logo from "./logo.svg";
 
@@ -10,10 +9,26 @@ const Navbar = () => {
       <div className="nav-center">
         <div className="nav-header">
           Logo
-          <button className="nav-toggle">s</button>
+          <button className="nav-toggle">
+            <FaBars />
+          </button>
         </div>
         <div className="links-container show-container">
-          <ul className="socoial-icons"></ul>
+          <div className="links">
+            <li>
+              <a href="#">Home</a>
+              <a href="#">About</a>
+              <a href="#">Contact</a>
+              <a href="#">Product</a>
+            </li>
+          </div>
+          <ul className="social-icons">
+            <li>
+              <a href="http://www.twitter.com">
+                <FaTwitter />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
